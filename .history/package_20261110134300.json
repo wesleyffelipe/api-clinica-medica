@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "type"
+    "express": "^5.3.0",
+    "mysql2": "^3.24.6"
+  }
+}

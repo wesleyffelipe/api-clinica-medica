@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "express": "^5.3.0",
+    "mysql2": "^3.24.6",
+    "type": "module"
+  },
+  "name": "api-clinica-medica",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "node --watch --env-"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wesleyffelipe/api-clinica-medica.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/wesleyffelipe/api-clinica-medica/issues"
+  },
+  "homepage": "https://github.com/wesleyffelipe/api-clinica-medica#readme"
+}
