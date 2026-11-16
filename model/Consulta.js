@@ -1,23 +1,19 @@
 export class Consulta{
-    constructor(data_hora, motivo, status, id){
+    constructor(data_hora, motivo, status_consulta){
         this.data_hora = data_hora;
-        this.movito = motivo;
-        this.status = status;
-        this.id = id;
+        this.motivo = motivo;
+        this.status_consulta = status_consulta;
     }
     
  validar(){
-        if (!this.nome || this.nome.trim().length < 3) {
-            throw new Error("Nome deve ter pelo menos 3 caracteres")
+        if (!this.motivo || this.motivo.trim().length < 3) {
+            throw new Error("Motivo deve ter pelo menos 5 caracteres")
         }
     
         if (!this.data_hora || this.data_hora.trim().length === 0) {
             throw new Error("Data e hora são obrigatórios");
         }
 
-        if (!this.cpf || this.cpf.trim().length  > 11 || this.cpf < 11) {
-            throw new Error("CPF deve ter exatos11 caracteres")
-        }
     }
         static validarId(id, consulta) {
             if (!Number.isInteger(id) || id <= 0) {

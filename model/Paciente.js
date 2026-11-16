@@ -1,6 +1,5 @@
 export class Paciente{
-    constructor(id, nome, cpf, data_nascimento){
-        this.id = id;
+    constructor(nome, cpf, data_nascimento){
         this.nome = nome;
         this.cpf = cpf;
         this.data_nascimento = data_nascimento;
@@ -11,8 +10,8 @@ export class Paciente{
             throw new Error("Nome deve ter pelo menos 3 caracteres")
         }
     
-        if (!this.cpf || this.crm.trim().length === 0) {
-            throw new Error("CRM é obrigatório");
+        if (!this.data_nascimento || this.data_nascimento.trim().length === 0) {
+            throw new Error("Data de nascimento é obrigatória");
         }
 
         if (!this.cpf || this.cpf.trim().length  > 11 || this.cpf < 11) {

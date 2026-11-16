@@ -1,12 +1,11 @@
 import conexao from "../database/conexao.js";
 
 export async function cadastrarCon(consulta) {
-  const sql = "INSERT INTO consulta (data_hora, motivo, status, id) VALUES (?, ?, ?, ?)";
+  const sql = "INSERT INTO consulta (data_hora, motivo, status_consulta) VALUES (?, ?, ?)";
   const [resultado] = await conexao.execute(sql, [
     consulta.data_hora,
     consulta.motivo,
-    consulta.status,
-    consulta.id
+    consulta.status_consulta
   ]);
 
   return resultado.insertId;
@@ -27,12 +26,11 @@ export async function buscarPorIdCon(id) {
 }
 
 export async function atualizarCon(id, consulta) {
-  const sql = "UPDATE consulta SET data_hora = ?, motivo = ?, status = ?, id = ? WHERE id_consulta = ?";
+  const sql = "UPDATE consulta SET data_hora = ?, motivo = ?, status_consulta = ? WHERE id_consulta = ?";
   const [resultado] = await conexao.execute(sql, [
-    consulta.id,
     consulta.data_hora,
     consulta.motivo,
-    consulta.status,
+    consulta.status_consulta,
     id
   ]);
 

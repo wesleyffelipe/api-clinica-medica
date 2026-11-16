@@ -9,24 +9,25 @@ import {
 
 export async function cadastrarPaciente(req, res) {
   try {
-    const { id, nome, cpf, data_nascimento } = req.body;
+    const { nome, cpf, data_nascimento } = req.body;
 
     if (!data_nascimento) {
       return res.status(400).json({
-        mensagem: "data de nascimento é obrigatória"
+        mensagem: "Data de nascimento é obrigatória"
       });
     }
 
-    const paciente = new Paciente(id, nome, cpf, data_nascimento);
-    const Id = await cadastrarMed(paciente);
+    const paciente = new Paciente(nome, cpf, data_nascimento);
+   
+    const Id = await cadastrarPac(paciente);
 
     return res.status(201).json({
-      id_paciente: id,
+      id_paciente: Id, 
       ...paciente
     });
   } catch (erro) {
     return res.status(500).json({
-      mensagem: "Erro ao cadastrar paciente"
+      mensagem: "Erro ao cadastrar paciente: " + erro.message
     });
   }
 }
@@ -37,7 +38,7 @@ export async function listarPaciente(req, res) {
     return res.status(200).json(pacientes);
   } catch (erro) {
     return res.status(500).json({
-      mensagem: "Erro ao listar pacientes"
+      mensagem: "Erro ao listar pacientes: " + erro.message
     });
   }
 }
@@ -55,14 +56,14 @@ export async function buscarPaciente(req, res) {
     return res.status(200).json(paciente);
   } catch (erro) {
     return res.status(500).json({
-      mensagem: "Erro ao buscar paciente"
+      mensagem: "Erro ao buscar paciente: " + erro.message
     });
   }
 }
 
 export async function editarPaciente(req, res) {
   try {
-    const { id, nome, cpf, data_nascimento } = req.body;
+    const { nome, cpf, data_nascimento } = req.body;
 
     if (!data_nascimento) {
       return res.status(400).json({
@@ -70,7 +71,7 @@ export async function editarPaciente(req, res) {
       });
     }
 
-    const paciente = new Paciente (id, nome, cpf, data_nascimento);
+    const paciente = new Paciente(nome, cpf, data_nascimento);
     const linhasAlteradas = await atualizarPac(req.params.id, paciente);
 
     if (linhasAlteradas === 0) {
@@ -84,7 +85,7 @@ export async function editarPaciente(req, res) {
     });
   } catch (erro) {
     return res.status(500).json({
-      mensagem: "Erro ao atualizar paciente"
+      mensagem: "Erro ao atualizar paciente: " + erro.message
     });
   }
 }
@@ -102,7 +103,7 @@ export async function removerPaciente(req, res) {
     return res.status(204).send();
   } catch (erro) {
     return res.status(500).json({
-      mensagem: "Erro ao excluir paciente"
+      mensagem: "Erro ao excluir paciente: " + erro.message
     });
   }
 }

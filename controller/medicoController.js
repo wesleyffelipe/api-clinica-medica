@@ -9,7 +9,7 @@ import {
 
 export async function cadastrarMedico(req, res) {
   try {
-    const { id, nome, crm, especialidade } = req.body;
+    const { nome, crm, especialidade } = req.body;
 
     if (!crm) {
       return res.status(400).json({
@@ -17,16 +17,16 @@ export async function cadastrarMedico(req, res) {
       });
     }
 
-    const medico = new Medico(id, nome, crm, especialidade);
+    const medico = new Medico(nome, crm, especialidade);
     const Id = await cadastrarMed(medico);
 
     return res.status(201).json({
-      id_medico: id,
+      id_medico: Id,
       ...medico
     });
   } catch (erro) {
     return res.status(500).json({
-      mensagem: "Erro ao cadastrar medico"
+      mensagem: "Erro ao cadastrar medico: " + erro.message
     });
   }
 }
@@ -37,7 +37,7 @@ export async function listarMedico(req, res) {
     return res.status(200).json(medicos);
   } catch (erro) {
     return res.status(500).json({
-      mensagem: "Erro ao listar medicos"
+      mensagem: "Erro ao listar medicos: " + erro.message
     });
   }
 }
@@ -55,14 +55,14 @@ export async function buscarMedico(req, res) {
     return res.status(200).json(medico);
   } catch (erro) {
     return res.status(500).json({
-      mensagem: "Erro ao buscar medico"
+      mensagem: "Erro ao buscar medico: " + erro.message
     });
   }
 }
 
 export async function editarMedico(req, res) {
   try {
-    const { id, nome, crm, especialidade } = req.body;
+    const { nome, crm, especialidade } = req.body;
 
     if (!crm) {
       return res.status(400).json({
@@ -70,7 +70,7 @@ export async function editarMedico(req, res) {
       });
     }
 
-    const medico = new Medico (id, nome, crm, especialidade);
+    const medico = new Medico(nome, crm, especialidade);
     const linhasAlteradas = await atualizarMed(req.params.id, medico);
 
     if (linhasAlteradas === 0) {
@@ -84,14 +84,14 @@ export async function editarMedico(req, res) {
     });
   } catch (erro) {
     return res.status(500).json({
-      mensagem: "Erro ao atualizar medico"
+      mensagem: "Erro ao atualizar medico: " + erro.message
     });
   }
 }
 
 export async function removerMedico(req, res) {
   try {
-    const linhasExcluidas = await excluir(req.params.id);
+    const linhasExcluidas = await excluirMed(req.params.id);
 
     if (linhasExcluidas === 0) {
       return res.status(404).json({
@@ -102,7 +102,7 @@ export async function removerMedico(req, res) {
     return res.status(204).send();
   } catch (erro) {
     return res.status(500).json({
-      mensagem: "Erro ao excluir medico"
+      mensagem: "Erro ao excluir medico: " + erro.message
     });
   }
 }

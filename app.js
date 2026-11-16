@@ -7,9 +7,9 @@ import pacienteRoutes from "./routes/pacienteRoutes.js";
 const app = express();
 
 app.use(express.json());
-app.use("/consultas", consultaRoutes);
-app.use("/medicos", medicoRoutes);
-app.use("/pacientes", pacienteRoutes);
+app.use("/consulta", consultaRoutes);
+app.use("/medico", medicoRoutes);
+app.use("/paciente", pacienteRoutes);
 
 async function iniciarServidor() {
   try {

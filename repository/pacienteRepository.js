@@ -1,13 +1,11 @@
 import conexao from "../database/conexao.js";
 
 export async function cadastrarPac(paciente) {
-  const sql = "INSERT INTO medico (id, nome, cpf, data_nascimento) VALUES (?, ?, ?, ?)";
+  const sql = "INSERT INTO paciente (nome, cpf, data_nascimento) VALUES (?, ?, ?)";
   const [resultado] = await conexao.execute(sql, [
-   paciente.id,
-   paciente.nome,
-   paciente.cpf,
-   paciente.data_nascimento,
-  
+    paciente.nome,
+    paciente.cpf,
+    paciente.data_nascimento
   ]);
 
   return resultado.insertId;
@@ -28,12 +26,11 @@ export async function buscarPorIdPac(id) {
 }
 
 export async function atualizarPac(id, paciente) {
-  const sql = "UPDATE paciente SET id = ?, nome = ?, cpf = ?, data_nascimento = ? WHERE id_medico = ?";
+  const sql = "UPDATE paciente SET nome = ?, cpf = ?, data_nascimento = ? WHERE id_paciente = ?";
   const [resultado] = await conexao.execute(sql, [
-    paciente.id,
     paciente.nome,
-    paciente.crm,
-    paciente.especialidade,
+    paciente.cpf,
+    paciente.data_nascimento,
     id
   ]);
 
